@@ -1,0 +1,27 @@
+* text=auto !eol
+/AUTHORS -text
+/COPYING -text
+/ChangeLog -text
+/Makefile.am -text
+/NEWS -text
+/README -text
+/apertium-kpv-fin.fin-kpv.lrx -text
+/apertium-kpv-fin.fin-kpv.rlx -text
+/apertium-kpv-fin.fin-kpv.t1x -text
+/apertium-kpv-fin.fin-kpv.t2x -text
+/apertium-kpv-fin.fin-kpv.t3x -text
+/apertium-kpv-fin.fin.lexc -text
+/apertium-kpv-fin.fin.twol -text
+/apertium-kpv-fin.kpv-fin.dix -text
+/apertium-kpv-fin.kpv-fin.lrx -text
+/apertium-kpv-fin.kpv-fin.rlx -text
+/apertium-kpv-fin.kpv-fin.t1x -text
+/apertium-kpv-fin.kpv-fin.t2x -text
+/apertium-kpv-fin.kpv-fin.t3x -text
+/apertium-kpv-fin.kpv.lexc -text
+/apertium-kpv-fin.kpv.twol -text
+/autogen.sh -text
+/configure.ac -text
+/fin-kpv.prob -text svneol=unset#unset
+/kpv-fin.prob -text svneol=unset#unset
+/modes.xml -text
