@@ -2,9 +2,9 @@
 <modes>
   <!-- kpv → fin --> 
 
-  <mode name="kpv-fin" install="yes">
+  <mode name="kpv-fin" install="yes" gendebug="yes">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
