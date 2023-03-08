@@ -1,0 +1,10 @@
+{
+    "fin-kpv": {
+        "input": "fin-kpv-input.txt",
+        "mode": "fin-kpv"
+    },
+    "kpv-fin": {
+        "input": "kpv-fin-input.txt",
+        "mode": "kpv-fin"
+    }
+}

@@ -1,21 +1,24 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <modes>
-  <!-- kpv → fin --> 
+  <!-- kpv→fin direction: -->
 
-  <mode name="kpv-fin" install="yes" gendebug="yes">
+  <mode name="kpv-fin" install="yes">
     <pipeline>
       <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-kpv-fin.kpv-fin.t1x"/>
@@ -35,20 +38,23 @@
     </pipeline>
   </mode>
 
-  <mode name="kpv-fin-debug" install="no">
+  <mode name="kpv-fin-debug" install="yes">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-kpv-fin.kpv-fin.t1x"/>
@@ -67,11 +73,12 @@
       </program>
     </pipeline>
   </mode>
- 
-  
+
+
+
   <mode name="kpv-fin-morph" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
     </pipeline>
@@ -79,42 +86,59 @@
 
   <mode name="kpv-fin-disam" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
-      <program name="cg-conv -a"/>
-      <program name="vislcg3 --trace --grammar">
-        <file name="kpv-fin.rlx.bin"/>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
     </pipeline>
   </mode>
+
+
+
+  <mode name="kpv-fin-syntax" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
 
 
   <mode name="kpv-fin-tagger" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
-      <program name="apertium-pretransfer"/>
     </pipeline>
   </mode>
+
+
 
   <mode name="kpv-fin-biltrans" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
@@ -122,48 +146,49 @@
       </program>
     </pipeline>
   </mode>
+
 
   <mode name="kpv-fin-lextor" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="kpv-fin.autobil.bin"/>
       </program>
-      <program name="lrx-proc -t">
+      <program name="lrx-proc -m -t">
         <file name="kpv-fin.autolex.bin"/>
       </program>
     </pipeline>
   </mode>
 
 
-  <mode name="kpv-fin-transfer" install="no">
+  <mode name="kpv-fin-chunker" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="kpv-fin.autobil.bin"/>
       </program>
-      <program name="lrx-proc">
+      <program name="lrx-proc -m">
         <file name="kpv-fin.autolex.bin"/>
       </program>
-      <program name="apertium-transfer -b">
+      <program name="apertium-transfer -t -b">
         <file name="apertium-kpv-fin.kpv-fin.t1x"/>
         <file name="kpv-fin.t1x.bin"/>
       </program>
@@ -172,27 +197,22 @@
 
   <mode name="kpv-fin-interchunk" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="kpv-fin.autobil.bin"/>
-      </program>
-      <program name="lrx-proc">
-        <file name="kpv-fin.autolex.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
+      <program name="apertium-transfer">
         <file name="apertium-kpv-fin.kpv-fin.t1x"/>
         <file name="kpv-fin.t1x.bin"/>
+        <file name="kpv-fin.autobil.bin"/>
       </program>
-      <program name="apertium-interchunk">
+      <program name="apertium-interchunk -t">
         <file name="apertium-kpv-fin.kpv-fin.t2x"/>
         <file name="kpv-fin.t2x.bin"/>
       </program>
@@ -201,20 +221,20 @@
 
   <mode name="kpv-fin-postchunk" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="kpv-fin.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="kpv-fin.rlx.bin"/>
+        <file name="kpv-fin.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="kpv-fin.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="kpv-fin.autobil.bin"/>
       </program>
-      <program name="lrx-proc">
+      <program name="lrx-proc -m">
         <file name="kpv-fin.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
@@ -232,22 +252,305 @@
     </pipeline>
   </mode>
 
-  <!-- fin → kpv -->
+  <mode name="kpv-fin-dgen">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t2x"/>
+        <file name="kpv-fin.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t3x"/>
+        <file name="kpv-fin.t3x.bin"/>
+      </program>
+      <program name="hfst-proc -d">
+        <file name="kpv-fin.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+
+  <!-- untrimmed kpv-fin, for debug: -->
+  <mode name="ukpv-fin" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t2x"/>
+        <file name="kpv-fin.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t3x"/>
+        <file name="kpv-fin.t3x.bin"/>
+      </program>
+      <program name="hfst-proc $1">
+        <file name="kpv-fin.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+
+  <mode name="ukpv-fin-morph" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-disam" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-syntax" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-tagger" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-biltrans" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-lextor" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m -t">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-chunker" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -t -b">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-interchunk" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="apertium-transfer">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="apertium-interchunk -t">
+        <file name="apertium-kpv-fin.kpv-fin.t2x"/>
+        <file name="kpv-fin.t2x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-postchunk" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t2x"/>
+        <file name="kpv-fin.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t3x"/>
+        <file name="kpv-fin.t3x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ukpv-fin-dgen">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="kpv-fin.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="kpv-fin.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="kpv-fin.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="kpv-fin.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="kpv-fin.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.kpv-fin.t1x"/>
+        <file name="kpv-fin.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t2x"/>
+        <file name="kpv-fin.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.kpv-fin.t3x"/>
+        <file name="kpv-fin.t3x.bin"/>
+      </program>
+      <program name="hfst-proc -d">
+        <file name="kpv-fin.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+
+  <!-- fin→kpv direction: -->
 
   <mode name="fin-kpv" install="yes">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-kpv-fin.fin-kpv.t1x"/>
@@ -267,20 +570,23 @@
     </pipeline>
   </mode>
 
-  <mode name="fin-kpv-debug" install="no">
+  <mode name="fin-kpv-debug" install="yes">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-kpv-fin.fin-kpv.t1x"/>
@@ -299,10 +605,12 @@
       </program>
     </pipeline>
   </mode>
-  
+
+
+
   <mode name="fin-kpv-morph" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
     </pipeline>
@@ -310,42 +618,59 @@
 
   <mode name="fin-kpv-disam" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
-      <program name="cg-conv -a"/>
-      <program name="vislcg3 --trace --grammar">
-        <file name="fin-kpv.rlx.bin"/>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
     </pipeline>
   </mode>
+
+
+
+  <mode name="fin-kpv-syntax" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
 
 
   <mode name="fin-kpv-tagger" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
-      <program name="apertium-pretransfer"/>
     </pipeline>
   </mode>
+
+
 
   <mode name="fin-kpv-biltrans" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
@@ -354,43 +679,48 @@
     </pipeline>
   </mode>
 
+
   <mode name="fin-kpv-lextor" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="fin-kpv.autobil.bin"/>
       </program>
-      <program name="lrx-proc">
+      <program name="lrx-proc -m -t">
         <file name="fin-kpv.autolex.bin"/>
       </program>
     </pipeline>
   </mode>
 
-  <mode name="fin-kpv-transfer" install="no">
+
+  <mode name="fin-kpv-chunker" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="fin-kpv.autobil.bin"/>
       </program>
-      <program name="apertium-transfer -b">
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -t -b">
         <file name="apertium-kpv-fin.fin-kpv.t1x"/>
         <file name="fin-kpv.t1x.bin"/>
       </program>
@@ -399,24 +729,22 @@
 
   <mode name="fin-kpv-interchunk" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
-      <program name="lt-proc -b">
-        <file name="fin-kpv.autobil.bin"/>
-      </program>
-      <program name="apertium-transfer -b">
+      <program name="apertium-transfer">
         <file name="apertium-kpv-fin.fin-kpv.t1x"/>
         <file name="fin-kpv.t1x.bin"/>
+        <file name="fin-kpv.autobil.bin"/>
       </program>
-      <program name="apertium-interchunk">
+      <program name="apertium-interchunk -t">
         <file name="apertium-kpv-fin.fin-kpv.t2x"/>
         <file name="fin-kpv.t2x.bin"/>
       </program>
@@ -425,18 +753,21 @@
 
   <mode name="fin-kpv-postchunk" install="no">
     <pipeline>
-      <program name="hfst-proc -w">
+      <program name="hfst-proc --weight-classes 1 -w -e">
         <file name="fin-kpv.automorf.hfst"/>
       </program>
       <program name="cg-proc -w">
-        <file name="fin-kpv.rlx.bin"/>
+        <file name="fin-kpv.mor.rlx.bin"/>
       </program>
-      <program name="apertium-tagger -g $2">
-        <file name="fin-kpv.prob"/>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
       </program>
       <program name="apertium-pretransfer"/>
       <program name="lt-proc -b">
         <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
       </program>
       <program name="apertium-transfer -b">
         <file name="apertium-kpv-fin.fin-kpv.t1x"/>
@@ -453,9 +784,284 @@
     </pipeline>
   </mode>
 
+  <mode name="fin-kpv-dgen">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t2x"/>
+        <file name="fin-kpv.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t3x"/>
+        <file name="fin-kpv.t3x.bin"/>
+      </program>
+      <program name="hfst-proc -d">
+        <file name="fin-kpv.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
 
+
+  <!-- untrimmed fin-kpv, for debug: -->
+  <mode name="ufin-kpv" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t2x"/>
+        <file name="fin-kpv.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t3x"/>
+        <file name="fin-kpv.t3x.bin"/>
+      </program>
+      <program name="hfst-proc $1">
+        <file name="fin-kpv.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+
+  <mode name="ufin-kpv-morph" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-disam" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-syntax" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-tagger" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-biltrans" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-lextor" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m -t">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-chunker" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -t -b">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-interchunk" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="apertium-transfer">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="apertium-interchunk -t">
+        <file name="apertium-kpv-fin.fin-kpv.t2x"/>
+        <file name="fin-kpv.t2x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-postchunk" install="no">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t2x"/>
+        <file name="fin-kpv.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t3x"/>
+        <file name="fin-kpv.t3x.bin"/>
+      </program>
+    </pipeline>
+  </mode>
+
+  <mode name="ufin-kpv-dgen">
+    <pipeline>
+      <program name="hfst-proc --weight-classes 1 -w -e">
+        <file name="fin-kpv.automorf-untrimmed.hfst"/>
+      </program>
+      <program name="cg-proc -w">
+        <file name="fin-kpv.mor.rlx.bin"/>
+      </program>
+      <program name="cg-proc -n -1 -w">
+        <file name="fin-kpv.syn.rlx.bin"/>
+      </program>
+      <program name="apertium-pretransfer"/>
+      <program name="lt-proc -b">
+        <file name="fin-kpv.autobil.bin"/>
+      </program>
+      <program name="lrx-proc -m">
+        <file name="fin-kpv.autolex.bin"/>
+      </program>
+      <program name="apertium-transfer -b">
+        <file name="apertium-kpv-fin.fin-kpv.t1x"/>
+        <file name="fin-kpv.t1x.bin"/>
+      </program>
+      <program name="apertium-interchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t2x"/>
+        <file name="fin-kpv.t2x.bin"/>
+      </program>
+      <program name="apertium-postchunk">
+        <file name="apertium-kpv-fin.fin-kpv.t3x"/>
+        <file name="fin-kpv.t3x.bin"/>
+      </program>
+      <program name="hfst-proc -d">
+        <file name="fin-kpv.autogen.hfst"/>
+      </program>
+    </pipeline>
+  </mode>
 
 
 </modes>
-
-
